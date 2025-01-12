@@ -13,8 +13,6 @@ public class Partie {
 
 	public Partie(){
 		this.reader = new BufferedReader(new InputStreamReader(System.in));
-
-
 	}
 
 public void initialiserPartie() throws IOException {
@@ -34,11 +32,21 @@ public void initialiserPartie() throws IOException {
     }
 
 	public void jouerPartie() {
+        int i = 0 ;
 		while (vainqueur == null) {
             Joueur joueurCourant = (prochainAJouer == 1) ? joueur1 : joueur2;
             Joueur adversaire = (prochainAJouer == 1) ? joueur2 : joueur1;
 
             joueurCourant.tirerSur(adversaire);
+            
+
+            if(i%2==0){
+                System.out.println("-----------------------------------------------");
+                
+            }
+            i++;
+
+            
 
             if (getVainqueur(adversaire)) {
                 vainqueur = adversaire.getNom();
@@ -48,6 +56,7 @@ public void initialiserPartie() throws IOException {
 			else {
                 prochainAJouer = (prochainAJouer == 1) ? 2 : 1;
             }
+            
 
         }
 
@@ -60,12 +69,13 @@ public void initialiserPartie() throws IOException {
         System.out.println("Le vainqueur est: " + vainqueur);
         System.out.println("Statistiques du Joueur 1:");
         joueur1.recapStatJoueur();
+        System.out.println("-----------------------------------------------");
         System.out.println("Statistiques du Joueur 2:");
         joueur2.recapStatJoueur();
     }
 
     public boolean getVainqueur(Joueur joueur) {;
-		if (joueur.getFrappesReussies() == 5)
+		if (joueur.getFrappesReussies() == 17)
 			return true;
 		else
 			return false;
