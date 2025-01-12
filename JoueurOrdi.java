@@ -1,6 +1,7 @@
 import java.util.Random;
 
 public class JoueurOrdi extends Joueur {
+    private static int compteur = 1;
 
     private Random random;
 
@@ -28,7 +29,7 @@ public class JoueurOrdi extends Joueur {
                 int x = random.nextInt(10);
                 int y = random.nextInt(10);
                 if (!getPlateau().verifierCollision(cases, x, y) && !getPlateau().verifierDepassement(cases, x, y)) {
-                    getPlateau().ajoutezBateau(bateau, x, y);
+                    getPlateau().ajoutezBateau(bateau, x, y,"V");
                     placed = true;
                 }
             }
@@ -56,7 +57,7 @@ public class JoueurOrdi extends Joueur {
                         incrementerBateauxCoules();
                     }System.out.println("ALLIE TOUCHE! Bateau ID: " + cible.getBateauId());
 
-                }else System.out.println("L'ennemi vous a Manqué!");
+                }else System.out.println("L'ennemi "+ adversaire.getNom()+" a Manqué!");
                 tirReussi = true;
             }
         }
@@ -64,6 +65,9 @@ public class JoueurOrdi extends Joueur {
 
     @Override
     public void initialiserNom() {
-        setNom("Ordinateur");
+        setNom("Ordinateur " + compteur++);
     }
+    
+        
+    
 }

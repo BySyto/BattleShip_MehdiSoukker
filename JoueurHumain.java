@@ -1,15 +1,16 @@
 import java.io.IOException;
-
+import Support.*;
 public class JoueurHumain extends Joueur {
 
     public JoueurHumain() {
         super();
         initialiserNom();
-    }
+      }
 
     @Override
     public void placerBateaux() {
-        System.out.println("Placement des bateaux pour1" + getNom());
+        
+        System.out.println("Placement des bateaux pour" + getNom());
         String[][] specs = Configuration.getBateaux();
         for (String[] spec : specs) {
             int id = Integer.parseInt(spec[0]);
@@ -23,15 +24,19 @@ public class JoueurHumain extends Joueur {
             boolean placed = false;
             while (!placed) {
                 try {
-                    System.out.println("Entrez les coordonnées de départ pour le bateau " + nom + " (taille " + taille + ") sous la forme x y:");
+                    System.out.println("Entrez les coordonnées de départ pour le bateau " + nom + " (taille " + taille + ") sous la forme x(de A a J) y (0 a 9):");
+                    String y_s = getReader().readLine().toUpperCase();  
+                    int y = Integer.parseInt(TraitementCoordonnee.CoordonneeLettreversNombre(y_s))-1; // Convertir la lettre en nombre 
                     int x = Integer.parseInt(getReader().readLine());
-                    int y = Integer.parseInt(getReader().readLine());
+                    System.out.println("Entrez l'orientation du bateau (H pour horizontal, V pour vertical):");
+                    String orientation = getReader().readLine().toUpperCase();
                     if (!getPlateau().verifierCollision(cases, x, y) && !getPlateau().verifierDepassement(cases, x, y)) {
-                        getPlateau().ajoutezBateau(bateau, x, y);
+                        getPlateau().ajoutezBateau(bateau, x, y,orientation);
                         placed = true;
                     } else {
                         System.out.println("Collision ou dépassement détecté. Veuillez réessayer.");
                     }
+                    getPlateau().afficherPlateau();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -44,9 +49,11 @@ public class JoueurHumain extends Joueur {
         boolean tirReussi = false;
         while (!tirReussi) {
             try {
+                
                 System.out.println("Entrez les coordonnées de tir sous la forme x y:");
+                String y_s = getReader().readLine().toUpperCase();  
+                int y = Integer.parseInt(TraitementCoordonnee.CoordonneeLettreversNombre(y_s))-1; // Convertir la lettre en nombre 
                 int x = Integer.parseInt(getReader().readLine());
-                int y = Integer.parseInt(getReader().readLine());
                 Case cible = adversaire.getPlateau().getCase(x, y);
                 if (!cible.getTouched()) {
                     cible.setTouchee();
