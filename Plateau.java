@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+
 public class Plateau {
 
 	private Case[][] tableau;
@@ -25,7 +26,7 @@ public class Plateau {
 	public Case getCase(int ligne, int colonne) {
 		return this.tableau[ligne][colonne];
 	}
-	public void ajoutezBateau(Bateau bateau, int ligne, int colonne) {
+    public void ajoutezBateau(Bateau bateau, int ligne, int colonne,String sens) {
         Case[][] casesBateau = bateau.getTableau();
         
         // Vérifiez si le bateau peut être placé sans collision
@@ -34,8 +35,8 @@ public class Plateau {
             return;
         }
 
-        // Ajoutez le bateau au plateau et définissez le bateau pour chaque case
-        for (int i = 0; i < casesBateau.length; i++) {
+        if ("V".equals(sens)) {
+            for (int i = 0; i < casesBateau.length; i++) {
             for (int j = 0; j < casesBateau[i].length; j++) {
                 int x = ligne + i;
                 int y = colonne + j;
@@ -43,6 +44,19 @@ public class Plateau {
                 tableau[x][y].setBateauId(bateau.getId());
             }
         }
+        }else if ("H".equals(sens)) {
+            for (int i = 0; i < casesBateau.length; i++) {
+                for (int j = 0; j < casesBateau[i].length; j++) {
+                    int x = ligne + j;
+                    int y = colonne + i;
+                    tableau[x][y] = casesBateau[i][j];
+                    tableau[x][y].setBateauId(bateau.getId());
+
+        }
+    }
+}
+        // Ajoutez le bateau au plateau et définissez le bateau pour chaque case
+        
 
         // Ajoutez le bateau à la liste des bateaux
         bateaux.add(bateau);
@@ -98,54 +112,15 @@ public class Plateau {
         adversaire.getPlateau().afficherPlateau();
     }
     public Bateau getBateau(int id) {
-
-        // Implementation to return the Bateau object with the given id
-
-        // This is a placeholder implementation
-
         for (Bateau bateau : bateaux) {
-
             if (bateau.getId() == id) {
-
                 return bateau;
-
             }
-
         }
-
         return null;
 
     }
 
-//     public static void main(String[] args) {
-//         Plateau plateau = new Plateau();
-//         // Ajoutez des bateaux pour tester
-//         Case[][] cases1 = { { new Case(0, 0) }, { new Case(1, 0) }, { new Case(2, 0) } };
-//         Bateau bateau1 = new Bateau(4, "Bateau1", cases1);
-//         plateau.ajoutezBateau(bateau1, 0, 0);
-
-//         Case[][] cases2 = { { new Case(0, 0) }, { new Case(1, 0) }, { new Case(2, 0) }, { new Case(3, 0) } };
-//         Bateau bateau2 = new Bateau(2, "Bateau2", cases2);
-//         plateau.ajoutezBateau(bateau2, 4, 0);
-
-//         plateau.afficherPlateau();
-//     }
-// public static void main(String[] args) {
-//     Joueur joueur1 = new JoueurHumain("Joueur 1");
-//     Joueur joueur2 = new JoueurOrdi("Joueur 2");
-
-//     // Ajoutez des bateaux pour tester
-//     Case[][] cases1 = { { new Case(0, 0) }, { new Case(1, 0) }, { new Case(2, 0) } };
-//     Bateau bateau1 = new Bateau(1, "Bateau1", cases1);
-//     joueur1.getPlateau().ajoutezBateau(bateau1, 0, 0);
-
-//     Case[][] cases2 = { { new Case(0, 0) }, { new Case(1, 0) }, { new Case(2, 0) }, { new Case(3, 0) } };
-//     Bateau bateau2 = new Bateau(2, "Bateau2", cases2);
-//     joueur2.getPlateau().ajoutezBateau(bateau2, 4, 0);
-
-//     Plateau plateau = new Plateau();
-//     plateau.afficherPlateauxTirs(joueur1, joueur2);
-// }
  }
 
 	
