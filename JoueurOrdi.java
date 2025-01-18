@@ -52,12 +52,27 @@ public class JoueurOrdi extends Joueur {
                     incrementerFrapperReussies();
                     // Vérifiez si le bateau est coulé
                     Bateau bateau = adversaire.getPlateau().getBateau(cible.getBateauId());
+                    //Moyen de debug car bateau etait tout le temps null(fonctionnel maintenant)
+                    if (bateau != null) {
+                        
+                        if (bateau.estCoulee()) {
+                            incrementerBateauxCoules();
+                            System.out.println("Bateau coulé! ID: " + bateau.getId());
+                        } else {
+                            System.out.println("Bateau touché mais pas coulé. ID: " + bateau.getId());
+                        }
+                    } else {
+                        System.out.println("Bateau est null pour ID: " + cible.getBateauId());
+                    }
+                    System.out.println(getNom() +" TOUCHE! Bateau ID: " + cible.getBateauId());
+                    getPlateau().afficherPlateauxTirs(this,adversaire);
+                    
 
-                    if (bateau.estCoulee(x,y)) {
-                        incrementerBateauxCoules();
-                    }System.out.println("ALLIE TOUCHE! Bateau ID: " + cible.getBateauId());
-
-                }else System.out.println("L'ennemi "+ adversaire.getNom()+" a Manqué!");
+                }else{
+                System.out.println(getNom()+" a Manqué!");
+                getPlateau().afficherPlateauxTirs(this,adversaire);
+            }
+                
                 tirReussi = true;
             }
         }

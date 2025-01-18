@@ -9,7 +9,7 @@ public abstract class Configuration {
     };
 	private static int tailleGrille = 10;
 
-	public String[][] getBateaux() {
+	public static String[][] getBateaux() {
 		return bateaux;
 	}
 
@@ -30,17 +30,9 @@ public abstract class Configuration {
 		return bateaux.length;
 	}
 
-	public int getTailleGrille() {
+	public static int getTailleGrille() {
 		return tailleGrille;
 	}
-	// public static void main(String[] args) {
-		
-	// 		for(int i = 1; i <= bateaux.length; i++) {
-	// 			System.out.println(getDescriptionBateau(i));
-	// 		}
-			
 
-
-	// }
 }
 

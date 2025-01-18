@@ -3,13 +3,19 @@ public class Menu {
 
 	private BufferedReader reader;
 
+	public Menu() {
+		this.reader = new BufferedReader(new InputStreamReader(System.in));
+	}
+
 	public void lancerPartie() {
 		Partie partie = new Partie();
-		partie.initialiserPartie();
-		partie.jouerPartie();
-		if(partie.getVainqueur() != null) {
-			System.out.println("Le vainqueur est : " + partie.getVainqueur());
+		try {
+			partie.initialiserPartie();
+			partie.jouerPartie();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
+		
 	}
 
 	public void quitter() {
@@ -43,7 +49,7 @@ public class Menu {
 					break;
 			}
 		} catch (IOException e) {
-			e.printStackTrace();
+			e.printStackTrace(); 
 		}
 	}
 
@@ -52,10 +58,9 @@ public class Menu {
 		System.out.println("Les règles sont simples :");
 		System.out.println("Chaque joueur place ses bateaux sur une grille de 10x10");
 		System.out.println("Chaque joueur a 5 bateaux :");
-		System.out.println("  1 Porte-Avion (5 cases)");
-		System.out.println("  1 Cuirassé (4 cases)");
-		System.out.println("  2 Croiseurs (3 cases)");
-		System.out.println("  1 torpilleur (2 cases)");
+		for(int i=1; i <6;i++) {
+			System.out.println(Configuration.getDescriptionBateau(i));
+		}
 		System.out.println("Les joueurs jouent à tour de rôle");
 		System.out.println("Le premier joueur à couler tous les bateaux de l'adversaire gagne");
 		afficherMenu();

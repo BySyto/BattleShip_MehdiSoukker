@@ -6,7 +6,8 @@ public class Test {
     public static void main(String[] args) throws IOException {
         boolean boucle = true;
         while(boucle){
-        System.out.println("DEBUG CLASSE TEST(suffit de mettre le nom de la classe, pour Joueur les deux classes sont testé en même temps)");
+        System.out.println("DEBUG CLASSE TEST(ecrire le nom de la classe)");
+        System.out.println("Configuration\nCase\nBateau\nPlateau\nJoueur\nPartie\nMenu");
         
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String choix = reader.readLine();
@@ -44,8 +45,8 @@ public class Test {
         for (int i = 1; i <= Configuration.getNombreBateaux(); i++) {
             System.out.println(Configuration.getDescriptionBateau(i));
         }
-        System.out.println("JNombre de Bateaux : "+Configuration.getNombreBateaux());
-        System.out.println("Taille de la grille : "+Configuration.getTailleGrille());
+        System.out.println("JNombre de Bateaux : "+ Configuration.getNombreBateaux());
+        System.out.println("Taille de la grille : "+ Configuration.getTailleGrille());
     }
 
     static void testCase() {
@@ -75,9 +76,13 @@ public class Test {
         System.out.println("Taille du bateau: " + bateau.getTailleBateau());
 
         // Test estCoulee method
-        System.out.println("Est coulé (0,0): " + bateau.estCoulee(0, 0));
-        bateau.getCase(0, 0).setTouchee();
-        System.out.println("Est coulé (0,0) après toucher: " + bateau.estCoulee(0, 0));
+        System.out.println("Est coulé (0,0): " + bateau.estCoulee());
+        for (int i = 0; i < tableau.length; i++) {
+            for (int j = 0; j < tableau[i].length; j++) {
+                bateau.getCase(i, j).setTouchee();
+            }
+        }
+        System.out.println("Est coulé (0,0) après toucher: " + bateau.estCoulee());
 
     }
 
@@ -131,9 +136,6 @@ public class Test {
         Partie partie = new Partie();
 		partie.initialiserPartie();
 	    partie.jouerPartie();
-
-
-
 
     }
 

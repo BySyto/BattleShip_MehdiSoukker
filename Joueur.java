@@ -77,10 +77,10 @@ public abstract class Joueur {
 	}
 
 	public void recapStatJoueur() {
-		System.out.println("Nom: " + this.nom);
-        System.out.println("Frappes Totales: " + this.frappesTotales);
-        System.out.println("Frappes Réussies: " + this.frappesReussies);
-        System.out.println("Bateaux Coulés: " + this.bateauxCoules);
+		System.out.println("Nom: " + getNom());
+        System.out.println("Frappes Totales: " + getFrappesTotales());
+        System.out.println("Frappes Réussies: " + getFrappesReussies());
+        System.out.println("Bateaux Coulés: " + getBateauxCoules());
 	}
 
 	public abstract void placerBateaux();

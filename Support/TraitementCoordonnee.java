@@ -6,18 +6,18 @@ public class TraitementCoordonnee {
 	 * 
 	 * @param coord
 	 */
-	public String CoordonneeLettreversNombre(String coord) {
-		// TODO - implement TraitementCoordonnee.CoordonneeLettreversNombre
-		throw new UnsupportedOperationException();
-	}
+	public static String CoordonneeLettreversNombre ( String coord ) {
+		return String . valueOf ( new String ( " ABCDEFGHIJ " ) . indexOf ( coord ) ) ;
+		}
 
 	/**
 	 * 
 	 * @param coord
 	 */
-	public String coordonneeNombreVersLettre(int coord) {
-		// TODO - implement TraitementCoordonnee.coordonneeNombreVersLettre
-		throw new UnsupportedOperationException();
-	}
-
+	public static String coordonneeNombreVersLettre ( int coord ) {
+		String [] lettres = { " A " , " B " , " C " , " D " , " E " , " F " , " G " , " H " , " I " ,
+		" J " };
+		return lettres [ coord ];
+		
+}
 }

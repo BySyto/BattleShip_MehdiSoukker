@@ -24,9 +24,11 @@ public class JoueurHumain extends Joueur {
             boolean placed = false;
             while (!placed) {
                 try {
-                    System.out.println("Entrez les coordonnées de départ pour le bateau " + nom + " (taille " + taille + ") sous la forme x(de A a J) y (0 a 9):");
+                    System.out.println("Entrez les coordonnées de départ pour le bateau " + nom + " (taille " + taille + ") sous la forme x(de A a J) ");
                     String y_s = getReader().readLine().toUpperCase();  
                     int y = Integer.parseInt(TraitementCoordonnee.CoordonneeLettreversNombre(y_s))-1; // Convertir la lettre en nombre 
+                    System.out.println("Entrez les coordonnées de départ pour le bateau " + nom + " (taille " + taille + ") sous la forme y (0 a 9):");
+
                     int x = Integer.parseInt(getReader().readLine());
                     System.out.println("Entrez l'orientation du bateau (H pour horizontal, V pour vertical):");
                     String orientation = getReader().readLine().toUpperCase();
@@ -52,7 +54,7 @@ public class JoueurHumain extends Joueur {
                 
                 System.out.println("Entrez les coordonnées de tir sous la forme x y:");
                 String y_s = getReader().readLine().toUpperCase();  
-                int y = Integer.parseInt(TraitementCoordonnee.CoordonneeLettreversNombre(y_s))-1; // Convertir la lettre en nombre 
+                int y = Integer.parseInt(TraitementCoordonnee.CoordonneeLettreversNombre(y_s))-1; // Convertir la lettre en nombre (Il y avait un decalage donc j'ai mis -1)
                 int x = Integer.parseInt(getReader().readLine());
                 Case cible = adversaire.getPlateau().getCase(x, y);
                 if (!cible.getTouched()) {
@@ -63,16 +65,20 @@ public class JoueurHumain extends Joueur {
                         incrementerFrapperReussies();
                         // Vérifiez si le bateau est coulé
                         Bateau bateau = adversaire.getPlateau().getBateau(cible.getBateauId());
-                        if (bateau.estCoulee(x,y)) {
+                        if (bateau.estCoulee()) {
                             incrementerBateauxCoules();
                         }
+                        
                         System.out.println("Touché! Bateau ID: " + cible.getBateauId());
+                        getPlateau().afficherPlateauxTirs(this,adversaire);
                     }else 
                         System.out.println("Manqué!");
+                        getPlateau().afficherPlateauxTirs(this,adversaire);
                     tirReussi = true;
                 } else {
                     System.out.println("Cette case a déjà été touchée. Veuillez réessayer.");
-                }
+                    
+                } 
             } catch (IOException e) {
                 e.printStackTrace();
             }

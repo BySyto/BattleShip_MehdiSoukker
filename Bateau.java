@@ -9,17 +9,20 @@ public class Bateau {
 		this.nom = nom;
 		this.tableau = tableau;
 	}
-
-	public boolean estCoulee( int ligne ,int colonne ) {
-		for (int i = 0; i < this.tableau.length; i++) {
-			for (int j = 0; j < this.tableau[i].length; j++) {
-				if (!this.tableau[i][j].getTouched()) {
+	// Méthode pour vérifier si le bateau est coulé
+	public boolean estCoulee() {
+		// Parcourt chaque ligne de cases du tableau
+		for (Case[] casesLigne : tableau) {
+			// Parcourt chaque case de la ligne
+			for (Case c : casesLigne) {
+				// Si une case pas touchée, le bateau pas coulé
+				if (!c.getTouched()) {
 					return false;
 				}
 			}
 		}
 		return true;
-}
+	}
 	
 
 	
@@ -44,26 +47,4 @@ public class Bateau {
 		return this.tableau;
 	}
 
-	// public static void main(String[] args) {
-		
-
-
-	// Case[][] tableau = new Case[3][1];
-	// for (int i = 0; i < tableau.length; i++) {
-	// 	for (int j = 0; j < tableau[i].length; j++) {
-	// 		tableau[i][j] = new Case(i,j);
-	// 	}
-	// }
-
-	// Bateau bateau = new Bateau(1, "Titanic", tableau);
-
-	// System.out.println("ID: " + bateau.getId());
-	// System.out.println("Nom: " + bateau.getNom());
-	// System.out.println("Taille du bateau: " + bateau.getTailleBateau());
-
-	// // Test estCoulee method
-	// System.out.println("Est coulé (0,0): " + bateau.estCoulee(0, 0));
-	// bateau.getCase(0, 0).setTouchee();
-	// System.out.println("Est coulé (0,0) après toucher: " + bateau.estCoulee(0, 0));
-	// }
 }
